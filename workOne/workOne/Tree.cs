@@ -74,7 +74,10 @@ namespace WorkOne
                 {
                     head.Left = newElement;
                 }
-                else head.Right = newElement;
+                else 
+                {
+                    head.Right = newElement;
+                }
             }
         }
 
