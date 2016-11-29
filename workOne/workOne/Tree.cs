@@ -5,11 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace workOne
+namespace WorkOne
 {
+    /// <summary>
+    /// class for binary tree with realization of iterator
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Tree<T> : IEnumerable<T> where T : IComparable<T>
     {
-        public class TreeElement
+        private class TreeElement
         {
             public T Value { get; set; }
             public TreeElement Right { get; set; }
@@ -23,13 +27,17 @@ namespace workOne
             }
         }
 
-        public TreeElement head;
+        private TreeElement head;
 
         public Tree()
         {
             head = null;
         }
 
+        /// <summary>
+        /// add new element in tree
+        /// </summary>
+        /// <param name="value"></param>
         public void AddValue(T value)
         {
             if (head == null)
@@ -80,6 +88,9 @@ namespace workOne
             return GetEnumerator();
         }
 
+        /// <summary>
+        /// class for tree iterator
+        /// </summary>
         private class TreeEnumerator : IEnumerator<T>
         {
             private Tree<T> tree;
@@ -94,6 +105,10 @@ namespace workOne
                 MakeTreeList(tree.head);
             }
 
+            /// <summary>
+            /// create list with elements of tree
+            /// </summary>
+            /// <param name="element"></param>
             private void MakeTreeList(TreeElement element)
             {
                 if (element != null)
@@ -130,6 +145,10 @@ namespace workOne
             {
             }
 
+            /// <summary>
+            /// move to next element
+            /// </summary>
+            /// <returns></returns>
             public bool MoveNext()
             {
                 if (position < treeList.Count - 1)
@@ -140,6 +159,9 @@ namespace workOne
                 return false;
             }
 
+            /// <summary>
+            /// reset enumerator
+            /// </summary>
             public void Reset()
             {
                 position = -1;
