@@ -11,11 +11,15 @@ namespace Network
     /// </summary>
     public class LocalNetwork
     {
-        private List<Computer> net;
+        private List<Computer> listOfAllComputersInNet;
+        private Random rand = new Random();
+        private bool[,] matrixOfLink;
 
-        public LocalNetwork(List<Computer> newNet)
+
+        public LocalNetwork(List<Computer> newNetOfComp, bool[,] mat)
         {
-            net = newNet;
+            this.listOfAllComputersInNet = newNetOfComp;
+            this.matrixOfLink = mat;
         }
 
         /// <summary>
@@ -23,24 +27,30 @@ namespace Network
         /// </summary>
         public void StepOfVirusInfection()
         {
-            foreach (var comp in net)
+            for(int i = 0; i < listOfAllComputersInNet.Count; ++i)
             {
-                foreach (var neib in comp.LinkComputers)
+                if(listOfAllComputersInNet[i].Infected)
                 {
-                    Random rnd = new Random();
-                    if (rnd.Next(10, 100) > 80)  
-                        net[neib].Infected = true;
+                    for (int j = 0; j < listOfAllComputersInNet.Count; ++j)
+                    {
+                        if(matrixOfLink[i,j] && !listOfAllComputersInNet[j].Infected)
+                        {
+                            if(rand.Next(1, 100) <= listOfAllComputersInNet[j].os.InfectionProbability)
+                            {
+                                listOfAllComputersInNet[j].Infected = true;
+                            }
+                        }
+                    }
                 }
-
             }
         }
 
         /// <summary>
         /// print on console network status
         /// </summary>
-        public void Print()
+        public void PrintStatusInStep()
         {
-            foreach (var comp in net)
+            foreach (var comp in listOfAllComputersInNet)
             {
                 Console.WriteLine(" OS:" + comp.os + " " + "Infection:" + comp.Infected);
             }
@@ -54,7 +64,7 @@ namespace Network
         public bool Check()
         {
             int i = 0;
-            foreach (var comp in net)
+            foreach (var comp in listOfAllComputersInNet)
             {
                 if (!comp.Infected)
                 {
@@ -72,12 +82,15 @@ namespace Network
             int i = 1;
             while (!Check())
             {
-
                 StepOfVirusInfection();
                 Console.WriteLine("Step " + i);
-                Print();
+                PrintStatusInStep();
+                System.Threading.Thread.Sleep(800);
                 ++i;
             }
+            Console.WriteLine("//////////////////////////////////////////////////////////////");
+            Console.WriteLine("///////////////////ALL COMPUTERS INFECTED/////////////////////");
+            Console.WriteLine("//////////////////////////////////////////////////////////////");
         }
     }
 }

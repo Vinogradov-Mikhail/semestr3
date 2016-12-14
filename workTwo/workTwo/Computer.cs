@@ -11,19 +11,16 @@ namespace Network
     /// </summary>
     public class Computer
     {
-        public string os;
+        /// <summary>
+        /// OperatingSystem of this PC
+        /// </summary>
+        public OperatingSystems os;
 
         public bool Infected { get; set; }
 
-        /// <summary>
-        /// list of comuters which link with this computer
-        /// </summary>
-        public List<int> LinkComputers { get; set; }
-
-        public Computer(string thisOs, bool poison, List<int> thisLinkComputers)
+        public Computer(OperatingSystems thisOs, bool poison)
         {
             os = thisOs;
-            LinkComputers = thisLinkComputers;
             Infected = poison;
         }
     }

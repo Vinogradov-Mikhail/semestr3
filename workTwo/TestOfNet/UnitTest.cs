@@ -7,20 +7,35 @@ namespace Network.Tests
     [TestClass]
     public class UnitTest
     {
+        private bool[,] mat;
+        private List<Computer> comp;
+        private OperatingSystems os;
+
         [TestMethod]
         public void TestOfIncetionNet()
         {
-            Computer comp1 = new Computer("Windows", false, new List<int> { 1, 2, 3 });
-            Computer comp2 = new Computer("Windows", false, new List<int> { 0, 3 });
-            Computer comp3 = new Computer("Windows", false, new List<int> { 1, 2 });
-            Computer comp4 = new Computer("Windows", false, new List<int> { 1, 3 });
-            List<Computer> computers = new List<Computer>();
-            computers.Add(comp1);
-            computers.Add(comp2);
-            computers.Add(comp3);
-            computers.Add(comp4);
-            LocalNetwork net = new LocalNetwork(computers);
+            mat = new bool[3, 3] { { false, true, true }, { true, false, false }, { true, false, false } };
+            comp = new List<Computer>
+            {
+                new Computer(new Windows(), false),
+                new Computer(new Linux(), false),
+                new Computer(new MacOS(), true)
+            };
+            var net = new LocalNetwork(comp, mat);
             net.VirusInfection();
+            Assert.AreEqual(true, net.Check());
+        }
+
+        [TestMethod]
+        public void OsProbabilityTest()
+        {
+            os = new MacOS();
+            Assert.AreEqual(10, os.InfectionProbability);
+            os = new Linux();
+            Assert.AreEqual(40, os.InfectionProbability);
+            os = new Windows();
+            Assert.AreEqual(80, os.InfectionProbability);
+
         }
     }
 }
