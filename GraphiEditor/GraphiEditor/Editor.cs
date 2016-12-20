@@ -25,9 +25,11 @@ namespace GraphiEditor
         public Editor()
         {
             InitializeComponent();
+            undoButton.Enabled = false;
+            redoButton.Enabled = false;
         }
 
-        private void pictureBoxPaintHandler(object sender, PaintEventArgs e)
+        private void PictureBoxPaintHandler(object sender, PaintEventArgs e)
         {
             ReDrawAll(e);
             if (canPaintLine && isStartCoordinate)
@@ -40,7 +42,7 @@ namespace GraphiEditor
             }
         }
 
-        private void pictureBoxMouseMoveHandler(object sender, MouseEventArgs e)
+        private void PictureBoxMouseMoveHandler(object sender, MouseEventArgs e)
         {
             currentMousePosition.X = e.X;
             currentMousePosition.Y = e.Y;
@@ -50,7 +52,7 @@ namespace GraphiEditor
             }
         }
 
-        private void pictureBoxMouseClickHandler(object sender, MouseEventArgs e)
+        private void PictureBoxMouseClickHandler(object sender, MouseEventArgs e)
         {
             var beforeClic = lastClickCoordinate;
             lastClickCoordinate.X = e.X;
@@ -59,6 +61,7 @@ namespace GraphiEditor
             {
                 lines.Add(new Line(beforeClic, lastClickCoordinate));
                 unre.AddCommand(new CommandLine(lines[lines.Count - 1], "Add"), true);
+                CheckStackUnRe();
                 canPaintLine = false;
                 isStartCoordinate = false;
             }
@@ -77,7 +80,8 @@ namespace GraphiEditor
                 isReDrawLineHasEnd = false;
                 isStartCoordinate = false;
                 lines.Add(new Line(redrowingLineEnd, lastClickCoordinate));
-                unre.AddCommand(new CommandLine(lines[lines.Count - 1], "Add"), true);                
+                unre.AddCommand(new CommandLine(lines[lines.Count - 1], "Add"), true);
+                CheckStackUnRe();
             }
         }
 
@@ -132,6 +136,7 @@ namespace GraphiEditor
             if (lines.Count != 0)
             {
                 unre.AddCommand(new CommandLine(lines[lines.Count - 1], "Remove"), true);
+                CheckStackUnRe();
                 lines.RemoveAt(lines.Count - 1);
             }
             pictureBox.Invalidate();
@@ -158,13 +163,36 @@ namespace GraphiEditor
         private void undoButton_Click(object sender, EventArgs e)
         {
             unre.Undo(lines);
+            CheckStackUnRe();
             pictureBox.Invalidate();
         }
 
         private void redoButton_Click(object sender, EventArgs e)
         {
             unre.Redo(lines);
+            CheckStackUnRe();
             pictureBox.Invalidate();
+        }
+        
+        private void CheckStackUnRe()
+        {
+            if (unre.UndoStakIsEmpty())
+            {
+                undoButton.Enabled = false;
+            }
+            else
+            {
+                undoButton.Enabled = true;
+            }
+
+            if (unre.RedoStakIsEmpty())
+            {
+                redoButton.Enabled = false;
+            }
+            else
+            {
+                redoButton.Enabled = true;
+            }
         }
     }
 }

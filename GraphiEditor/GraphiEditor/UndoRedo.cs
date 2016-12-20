@@ -70,5 +70,15 @@ namespace GraphiEditor
                 undo.Push(null);
             }
         }
+
+        public bool UndoStakIsEmpty()
+        {
+            return undo.Count == 0;
+        }
+
+        public bool RedoStakIsEmpty()
+        {
+            return redo.Count == 0;
+        }
     }
 }
