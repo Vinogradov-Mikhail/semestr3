@@ -14,9 +14,30 @@ namespace Network
         /// <summary>
         /// OperatingSystem of this PC
         /// </summary>
-        public OperatingSystems os;
+        private OperatingSystems os;
 
+        /// <summary>
+        /// is computer infected
+        /// </summary>
         public bool Infected { get; set; }
+
+        /// <summary>
+        /// get os probability
+        /// </summary>
+        /// <returns></returns>
+        public int GetProbability()
+        {
+            return os.InfectionProbability;
+        }
+
+        /// <summary>
+        /// get os name
+        /// </summary>
+        /// <returns></returns>
+        public string GetOsName()
+        {
+            return os.NameOfOs;
+        }
 
         public Computer(OperatingSystems thisOs, bool poison)
         {

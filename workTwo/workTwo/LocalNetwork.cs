@@ -15,7 +15,6 @@ namespace Network
         private Random rand = new Random();
         private bool[,] matrixOfLink;
 
-
         public LocalNetwork(List<Computer> newNetOfComp, bool[,] mat)
         {
             this.listOfAllComputersInNet = newNetOfComp;
@@ -27,17 +26,20 @@ namespace Network
         /// </summary>
         public void StepOfVirusInfection()
         {
-            for(int i = 0; i < listOfAllComputersInNet.Count; ++i)
+            List<Computer> listOfComputersInfectedInThisStep = new List<Computer>();
+            for( int i = 0; i < listOfAllComputersInNet.Count; ++i)
             {
                 if(listOfAllComputersInNet[i].Infected)
                 {
-                    for (int j = 0; j < listOfAllComputersInNet.Count; ++j)
+                    for ( int j = 0; j < listOfAllComputersInNet.Count; ++j)
                     {
-                        if(matrixOfLink[i,j] && !listOfAllComputersInNet[j].Infected)
+                        if(matrixOfLink[i,j] && !listOfAllComputersInNet[j].Infected 
+                            && !listOfComputersInfectedInThisStep.Contains(listOfAllComputersInNet[j]))
                         {
-                            if(rand.Next(1, 100) <= listOfAllComputersInNet[j].os.InfectionProbability)
+                            if(rand.Next(1, 100) <= listOfAllComputersInNet[j].GetProbability())
                             {
                                 listOfAllComputersInNet[j].Infected = true;
+                                listOfComputersInfectedInThisStep.Add(listOfAllComputersInNet[j]);
                             }
                         }
                     }
@@ -52,7 +54,7 @@ namespace Network
         {
             foreach (var comp in listOfAllComputersInNet)
             {
-                Console.WriteLine(" OS:" + comp.os + " " + "Infection:" + comp.Infected);
+                Console.WriteLine(" OS:" + comp.GetOsName() + " " + "Infection:" + comp.Infected);
             }
             Console.WriteLine();
         }

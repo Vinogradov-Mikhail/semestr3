@@ -35,7 +35,36 @@ namespace Network.Tests
             Assert.AreEqual(40, os.InfectionProbability);
             os = new Windows();
             Assert.AreEqual(80, os.InfectionProbability);
+        }
 
+        [TestMethod]
+        public void StepOfVirusTest()
+        {
+            mat = new bool[3, 3] { { false, true, false }, { true, false, true }, { true, true, false } };
+            comp = new List<Computer>
+            {
+                new Computer(new Windows(), true),
+                new Computer(new Linux(), false),
+                new Computer(new MacOS(), false)
+            };
+            var net = new LocalNetwork(comp, mat);
+            net.StepOfVirusInfection();
+            Assert.IsFalse(net.Check());
+        }
+
+        [TestMethod]
+        public void NetworkTest()
+        {
+            mat = new bool[4, 4] { { false, true, true, false}, { true, false, false, true}, { true, false, false, true }, { false, true, true, false } };
+            comp = new List<Computer>
+            {
+                new Computer(new Windows(), false),
+                new Computer(new Linux(), false),
+                new Computer(new MacOS(), true),
+                new Computer(new MacOS(), true)
+            };
+            var net = new LocalNetwork(comp, mat);
+            net.VirusInfection();
         }
     }
 }

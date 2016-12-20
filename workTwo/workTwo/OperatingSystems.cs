@@ -11,8 +11,14 @@ namespace Network
     /// </summary>
     public abstract class OperatingSystems
     {
+        /// <summary>
+        /// name of os
+        /// </summary>
         public string NameOfOs { get; set; }
 
+        /// <summary>
+        /// probability of infection
+        /// </summary>
         public int InfectionProbability { get; set; }
     }
 }
