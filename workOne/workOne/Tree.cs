@@ -78,6 +78,92 @@ namespace WorkOne
             }
         }
 
+        /// <summary>
+        /// create a new tre without element which we want delete
+        /// </summary>
+        /// <param name="currentElement"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private TreeElement RemoveElement(TreeElement currentElement, T value)
+        {
+            if (currentElement == null)
+            {
+                return null;
+            }
+
+            if (value.CompareTo(currentElement.Value) < 0)
+            {
+                currentElement.Left = RemoveElement(currentElement.Left, value);
+               
+            }
+            else if (value.CompareTo(currentElement.Value) > 0)
+            {
+                currentElement.Right = RemoveElement(currentElement.Right, value);
+            }
+            else
+            {
+                if (currentElement.Left == null && currentElement.Right == null)
+                {
+                    return null;
+                }
+                if (currentElement.Left == null && currentElement.Right != null)
+                {
+                    currentElement = currentElement.Right;
+                }
+                else if (currentElement.Left != null && currentElement.Right == null)
+                {
+                    currentElement = currentElement.Left;
+                }
+                else
+                {                  
+                    var curLeft = currentElement.Left;
+                    var curRight = currentElement.Right;
+                    currentElement = currentElement.Left;
+                    while (curLeft.Right != null)
+                    {
+                        curLeft = curLeft.Right;
+                    }
+                    curLeft.Right = curRight;
+                }
+            }
+            return currentElement;
+        }
+
+        /// <summary>
+        /// remove element from list
+        /// </summary>
+        /// <param name="value"></param>
+        public void Remove(T value)
+        {
+            head = RemoveElement(head, value);
+        }
+
+        /// <summary>
+        /// search element in tree
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool SearchElement(T value)
+        {
+            var temp = head;
+            while (temp != null)
+            {
+                if (value.CompareTo(temp.Value) == 0)
+                {
+                    return true;
+                }
+                if (value.CompareTo(temp.Value) > 0)
+                {
+                    temp = temp.Right;
+                }
+                else
+                {
+                    temp = temp.Left;
+                }
+            }
+            return false;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             return new TreeEnumerator(this);
