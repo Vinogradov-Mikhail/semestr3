@@ -25,10 +25,7 @@ namespace Network
         /// get os probability
         /// </summary>
         /// <returns></returns>
-        public int GetProbability()
-        {
-            return os.InfectionProbability;
-        }
+        public int GetProbability() => os.InfectionProbability;
 
         /// <summary>
         /// get os name
@@ -38,7 +35,11 @@ namespace Network
         {
             return os.NameOfOs;
         }
-
-        public int GetProbability() => os.InfectionProbability;
+        
+        public Computer(OperatingSystems thisOs, bool poison)
+        {
+            os = thisOs;
+            Infected = poison;
+        }       
     }
 }
