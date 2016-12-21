@@ -39,10 +39,6 @@ namespace Network
             return os.NameOfOs;
         }
 
-        public Computer(OperatingSystems thisOs, bool poison)
-        {
-            os = thisOs;
-            Infected = poison;
-        }
+        public int GetProbability() => os.InfectionProbability;
     }
 }
