@@ -14,7 +14,7 @@ namespace Network.Tests
         [TestMethod]
         public void TestOfIncetionNet()
         {
-            mat = new bool[3, 3] { { false, true, true }, { true, false, false }, { true, false, false } };
+            mat = new bool[,] { { false, true, true }, { true, false, false }, { true, false, false } };
             comp = new List<Computer>
             {
                 new Computer(new Windows(), false),
@@ -23,7 +23,7 @@ namespace Network.Tests
             };
             var net = new LocalNetwork(comp, mat);
             net.VirusInfection();
-            Assert.AreEqual(true, net.Check());
+            Assert.IsTrue(net.Check());
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace Network.Tests
         [TestMethod]
         public void StepOfVirusTest()
         {
-            mat = new bool[3, 3] { { false, true, false }, { true, false, true }, { true, true, false } };
+            mat = new bool[,] { { false, true, false }, { true, false, true }, { true, true, false } };
             comp = new List<Computer>
             {
                 new Computer(new Windows(), true),
@@ -55,7 +55,7 @@ namespace Network.Tests
         [TestMethod]
         public void NetworkTest()
         {
-            mat = new bool[4, 4] { { false, true, true, false}, { true, false, false, true}, { true, false, false, true }, { false, true, true, false } };
+            mat = new bool[,] { { false, true, true, false}, { true, false, false, true}, { true, false, false, true }, { false, true, true, false } };
             comp = new List<Computer>
             {
                 new Computer(new Windows(), false),
@@ -65,6 +65,7 @@ namespace Network.Tests
             };
             var net = new LocalNetwork(comp, mat);
             net.VirusInfection();
+            Assert.IsTrue(net.Check());
         }
     }
 }

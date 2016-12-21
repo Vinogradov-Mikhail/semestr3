@@ -29,11 +29,11 @@ namespace Network
             List<Computer> listOfComputersInfectedInThisStep = new List<Computer>();
             for( int i = 0; i < listOfAllComputersInNet.Count; ++i)
             {
-                if(listOfAllComputersInNet[i].Infected)
+                if (listOfAllComputersInNet[i].Infected)
                 {
                     for ( int j = 0; j < listOfAllComputersInNet.Count; ++j)
                     {
-                        if(matrixOfLink[i,j] && !listOfAllComputersInNet[j].Infected 
+                        if (matrixOfLink[i,j] && !listOfAllComputersInNet[j].Infected 
                             && !listOfComputersInfectedInThisStep.Contains(listOfAllComputersInNet[j]))
                         {
                             if(rand.Next(1, 100) <= listOfAllComputersInNet[j].GetProbability())
@@ -82,6 +82,8 @@ namespace Network
         public void VirusInfection()
         {
             int i = 1;
+            Console.WriteLine("Step 0");
+            PrintStatusInStep();
             while (!Check())
             {
                 StepOfVirusInfection();
