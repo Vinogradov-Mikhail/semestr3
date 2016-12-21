@@ -9,7 +9,7 @@ namespace workThree
     {
         private Graph graph;
         private int countVertex;
-        private bool[] WithRobots;
+        private bool[] WithRobots;//shows in which the vertуч are located robots
 
         public Robots(Graph graph, bool[] positionAdd)
         {
