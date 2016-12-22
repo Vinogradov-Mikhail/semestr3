@@ -6,29 +6,24 @@ namespace workThree.Tests
     [TestClass]
     public class UnitTest1
     {
-        private Graph graph;
-        private bool[,] vertexMatrix;
-        private bool[] roborsPosition;
-        private Robots robots;
-
         [TestMethod]
         public void TestOfWorkForGraphOfThree()
         {
-            vertexMatrix = new bool[,] { { true, true, false }, { true, true, true }, { false, true, true } };
-            roborsPosition = new bool[] { true, false, true };
-            graph = new Graph(vertexMatrix, roborsPosition.Length);
-            robots = new Robots(graph, roborsPosition);
+            bool[,] vertexMatrix = new bool[,] { { true, true, false }, { true, true, true }, { false, true, true } };
+            bool[] roborsPosition = new bool[] { true, false, true };
+            Graph graph = new Graph(vertexMatrix, roborsPosition.Length);
+            Robots robots = new Robots(graph, roborsPosition);
             Assert.IsTrue(robots.RobotsWarWithKillingAll());
         }
 
         [TestMethod]
         public void TestOfWorkForGraphOfFour()
         {
-            vertexMatrix = new bool[,] { { true, true, true, false }, { true, true, false, true }, 
+            bool[,] vertexMatrix = new bool[,] { { true, true, true, false }, { true, true, false, true }, 
                 { true, false, true, true }, { false, true, true, true } };
             roborsPosition = new bool[] { true, false, false, true };
-            graph = new Graph(vertexMatrix, roborsPosition.Length);
-            robots = new Robots(graph, roborsPosition);
+            Graph graph = new Graph(vertexMatrix, roborsPosition.Length);
+            Robots robots = new Robots(graph, roborsPosition);
             Assert.IsTrue(robots.RobotsWarWithKillingAll());
             roborsPosition[0] = false;
             Assert.IsFalse(robots.RobotsWarWithKillingAll());
@@ -37,12 +32,12 @@ namespace workThree.Tests
         [TestMethod]
         public void TestOfWorkForGraphOfFive()
         {
-            vertexMatrix = new bool[,] { { true, false, true, false, false }, { false, true, false, true, true },
+            bool[,] vertexMatrix = new bool[,] { { true, false, true, false, false }, { false, true, false, true, true },
                 { true, false, true, true, false }, { false, true, true, true, false }, 
                 { false, true, false, false, true } };
-            roborsPosition = new bool[] { true, true, true, true, true };
-            graph = new Graph(vertexMatrix, roborsPosition.Length);
-            robots = new Robots(graph, roborsPosition);
+            bool[] roborsPosition = new bool[] { true, true, true, true, true };
+            Graph graph = new Graph(vertexMatrix, roborsPosition.Length);
+            Robots robots = new Robots(graph, roborsPosition);
             Assert.IsTrue(robots.RobotsWarWithKillingAll());
             roborsPosition[1] = false;
             Assert.IsFalse(robots.RobotsWarWithKillingAll());
