@@ -1,0 +1,5 @@
+C:\Users\Михаил\Documents\semestr3\workThree\workThree\bin\Debug\workThree.exe
+C:\Users\Михаил\Documents\semestr3\workThree\workThree\bin\Debug\workThree.pdb
+C:\Users\Михаил\Documents\semestr3\workThree\workThree\obj\Debug\workThree.csprojResolveAssemblyReference.cache
+C:\Users\Михаил\Documents\semestr3\workThree\workThree\obj\Debug\workThree.exe
+C:\Users\Михаил\Documents\semestr3\workThree\workThree\obj\Debug\workThree.pdb
