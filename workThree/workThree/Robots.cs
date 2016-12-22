@@ -5,17 +5,20 @@ using System.Text;
 
 namespace workThree
 {
+    /// <summary>
+    /// class for realization robots with graph where robots can be destroed all
+    /// </summary>
     public class Robots
     {
         private Graph graph;
         private int countVertex;
-        private bool[] WithRobots;
+        private bool[] withRobots; //shows in which the vertex are robots
 
         public Robots(Graph graph, bool[] positionAdd)
         {
             this.graph = graph;
             this.countVertex = graph.ReturnSize();
-            this.WithRobots = positionAdd;
+            this.withRobots = positionAdd;
         }
 
         /// <summary>
@@ -30,7 +33,7 @@ namespace workThree
             while (StackOfVertex.Count != 0)
             {
                 int thisVertex = StackOfVertex.Pop();
-                if (thisVertex != thisRobot && WithRobots[thisVertex])
+                if (thisVertex != thisRobot && withRobots[thisVertex])
                 {
                     robotIsDestroyed[thisRobot] = true;
                     robotIsDestroyed[thisVertex] = true;
@@ -61,7 +64,7 @@ namespace workThree
 
             for (int i = 0; i < countVertex; ++i)
             {
-                if (WithRobots[i] && !isRobotDestroyed[i])
+                if (withRobots[i])
                 {
                     if (!CanDestroy(i, isRobotDestroyed))
                     {

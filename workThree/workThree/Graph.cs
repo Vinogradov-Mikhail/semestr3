@@ -5,6 +5,9 @@ using System.Text;
 
 namespace workThree
 {
+    /// <summary>
+    /// class for graph realization in matrix form
+    /// </summary>
     public class Graph
     {
         private int numberOfVertices;
@@ -19,17 +22,11 @@ namespace workThree
         /// <summary>
         /// check is vertex way
         /// </summary>
-        public bool HasWay(int i, int j)
-        {
-            return graph[i, j];
-        }
+        public bool HasWay(int i, int j) => graph[i, j];
 
         /// <summary>
         /// return count of vertex
         /// </summary>
-        public int ReturnSize()
-        {
-            return numberOfVertices;
-        }
+        public int ReturnSize() => numberOfVertices;
     }
 }
