@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Network
 {
     /// <summary>
-    /// class for comuter
+    /// class for Сomuter in Local Network
     /// </summary>
     public class Computer
     {
@@ -31,10 +31,7 @@ namespace Network
         /// get os name
         /// </summary>
         /// <returns></returns>
-        public string GetOsName()
-        {
-            return os.NameOfOs;
-        }
+        public string GetOsName() => os.NameOfOs;
         
         public Computer(OperatingSystems thisOs, bool poison)
         {
