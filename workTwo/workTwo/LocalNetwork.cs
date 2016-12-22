@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Network
 {
     /// <summary>
-    /// class foe local network
+    /// class Of realization Local Network with infected computers, which infected all
     /// </summary>
     public class LocalNetwork
     {
@@ -27,7 +27,7 @@ namespace Network
         public void StepOfVirusInfection()
         {
             List<Computer> listOfComputersInfectedInThisStep = new List<Computer>();
-            for( int i = 0; i < listOfAllComputersInNet.Count; ++i)
+            for ( int i = 0; i < listOfAllComputersInNet.Count; ++i)
             {
                 if (listOfAllComputersInNet[i].Infected)
                 {
