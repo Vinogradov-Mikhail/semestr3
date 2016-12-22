@@ -174,25 +174,13 @@ namespace GraphiEditor
             pictureBox.Invalidate();
         }
         
+        /// <summary>
+        /// make enable or disable undo and redo button
+        /// </summary>
         private void CheckStackUnRe()
         {
-            if (unre.UndoStakIsEmpty())
-            {
-                undoButton.Enabled = false;
-            }
-            else
-            {
-                undoButton.Enabled = true;
-            }
-
-            if (unre.RedoStakIsEmpty())
-            {
-                redoButton.Enabled = false;
-            }
-            else
-            {
-                redoButton.Enabled = true;
-            }
+            undoButton.Enabled = !unre.UndoStakIsEmpty(); 
+            redoButton.Enabled = !unre.RedoStakIsEmpty();
         }
     }
 }
