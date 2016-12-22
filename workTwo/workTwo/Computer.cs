@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Network
 {
     /// <summary>
-    /// class for Сomuter in Local Network
+    /// class realization Сomputer with type of OS and infected of this pc in Local Network
     /// </summary>
     public class Computer
     {
